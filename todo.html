@@ -1,44 +1,36 @@
-<!DOCTYPE html>
+0<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workspace Task Manager</title>
     <script>
-        const API = "http://127.0.0.1:5000/api/tasks";>
+        const API = "http://127.0.0.1:5000/api/tasks;">
     </script>
-    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
-
 <style>
     body {
         background: linear-gradient(135deg, #eef2ff, #f8fafc);
         font-family: Arial, sans-serif;
         color: #1f2937;
     }
-
     h1, h2 {
         color: #4f46e5;
     }
-
     button {
         transition: 0.3s;
     }
-
     button:hover {
         transform: scale(1.05);
     }
-
     input, textarea {
         border: 1px solid #cbd5e1;
         outline: none;
     }
-
     input:focus, textarea:focus {
         border-color: #6366f1;
         box-shadow: 0 0 5px #a5b4fc;
     }
-
     .card {
         background: white;
         border-radius: 12px;
@@ -46,7 +38,6 @@
         margin-bottom: 10px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-
     .btn-primary {
         background: #4f46e5;
         color: white;
@@ -54,60 +45,45 @@
         border-radius: 8px;
         border: none;
     }
-
     .btn-primary:hover {
         background: #4338ca;
     }
-
     .completed {
         color: green;
         font-weight: bold;
     }
-
     .pending {
         color: orange;
         font-weight: bold;
     }
 </style>
-
 <body style="background-color: #f5f5f5;">
-
 <div>
-
     <div>
-
         <div>
             Workspace Task Manager
         </div>
-
         <h1>
             Simple To-Do Application
         </h1>
-
         <button onclick="loadTasks()">
             Sync DB
         </button>
-
         <div>
-
             <div>
                 <span>Total: <span id="total-count">0</span></span>
                 <span>Pending: <span id="pending-count">0</span></span>
                 <span>Completed: <span id="completed-count">0</span></span>
             </div>
-
             <div>
                 <span id="progress-percent">0%</span> Done
             </div>
-
-        </div>
-
-        <div>
+       </div>
+       <div>
             <div style="width:100%; background:#eee; height:10px;">
                 <div id="progress-bar" style="width:0%; background:blue; height:10px;"></div>
             </div>
-        </div>
-
+       </div>
     </div>
 
     <div>
@@ -244,4 +220,4 @@
             document.getElementById('total-count').innerText = total;
             document.getElementById('pending-count').innerText = pending;
             document.getElementById('completed-count').innerText = completed;
- 
+     </html>
