@@ -1,16 +1,15 @@
 from flask import Flask, request, jsonify
 import sqlite3
-
 app = Flask(__name__)
-DATABASE = "todo.db"
+DATABASE=todo.db
 
-
+#database config
 def get_connection():
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     return conn
 
-
+#create_table
 def create_table():
     conn = get_connection()
     cursor = conn.cursor()
@@ -32,7 +31,7 @@ def create_table():
 
 create_table()
 
-
+#home
 @app.route("/")
 def home():
     return jsonify({"message": "To-Do API is Running"})
@@ -53,7 +52,7 @@ def add_task():
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO tasks(title, description) VALUES(?, ?)",
+        "INSERT INTO tasks(title, description) VALUES(%s, %s)",
         (title, description)
     )
 
@@ -63,7 +62,7 @@ def add_task():
     return jsonify({"message": "Task Added Successfully"}), 201
 
 
-# GET ALL TASKS
+# GET TASKS
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
 
