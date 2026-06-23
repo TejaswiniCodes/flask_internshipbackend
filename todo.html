@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workspace Task Manager</title>
     <script>
-        const API = "http://127.0.0.1:5000/api/tasks;">
+        const API = "http://127.0.0.1:5000/api/tasks;"
     </script>
 </head>
 <style>
@@ -85,51 +85,34 @@
             </div>
        </div>
     </div>
-
     <div>
-
         <h2>Add New Task</h2>
-
         <input type="text" id="title" placeholder="Task title">
-
         <textarea id="description" placeholder="Description"></textarea>
-
         <button onclick="handleSave()">
             Save to Database
         </button>
-
     </div>
-
     <div>
-
         <input type="text" id="search" oninput="renderList()" placeholder="Search tasks...">
-
         <div>
-
             <button onclick="filterBy('All')">All</button>
             <button onclick="filterBy('Pending')">Pending</button>
             <button onclick="filterBy('Completed')">Completed</button>
-
             <select id="sort" onchange="renderList()">
                 <option value="newest">Newest</option>
                 <option value="oldest">Oldest</option>
             </select>
-
         </div>
-
     </div>
-
     <div id="task-container"></div>
-
 </div>
-
 </body>
-    
     <script>
         let tasksArray = [];
         let activeFilter = 'All';
 
-        // 1. GET: 
+        // GET
         function loadTasks() {
             fetch('/api/tasks')
                 .then(response => response.json())
@@ -140,7 +123,7 @@
                 .catch(error => console.error('Error:', error));
         }
 
-        // 2. POST: 
+        //POST 
         function handleSave() {
             const titleInput = document.getElementById('title');
             const descInput = document.getElementById('description');
@@ -149,12 +132,10 @@
                 alert('Please enter a task title');
                 return;
             }
-
             const payload = {
                 title: titleInput.value,
                 description: descInput.value
             };
-
             fetch('/api/tasks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -168,7 +149,7 @@
             });
         }
 
-        // 3. PUT 
+        // PUT 
         function toggleTaskStatus(id, currentStatus) {
             const nextStatus = currentStatus === 'Pending' ? 'Completed' : 'Pending';
 
@@ -180,19 +161,15 @@
             .then(() => loadTasks());
         }
 
-        // 4. DELETE
+        //DELETE
         function deleteTask(id) {
             if (confirm('Delete this task?')) {
                 fetch(`/api/tasks/${id}`, { method: 'DELETE' })
                     .then(() => loadTasks());
             }
         }
-
-       
         function filterBy(status) {
             activeFilter = status;
-            
-            
             ['All', 'Pending', 'Completed'].forEach(item => {
                 const btn = document.getElementById(`btn-${item.toLowerCase()}`);
                 if (item === status) {
@@ -201,22 +178,16 @@
                     btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer";
                 }
             });
-            
             renderList();
         }
-
-        
         function renderList() {
             const container = document.getElementById('task-container');
             const searchQuery = document.getElementById('search').value.toLowerCase();
             const sortOrder = document.getElementById('sort').value;
-
-            
             const total = tasksArray.length;
             const pending = tasksArray.filter(t => t.status === 'Pending').length;
             const completed = tasksArray.filter(t => t.status === 'Completed').length;
             const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-
             document.getElementById('total-count').innerText = total;
             document.getElementById('pending-count').innerText = pending;
             document.getElementById('completed-count').innerText = completed;
