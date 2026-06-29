@@ -52,9 +52,7 @@ def signup():
     cur=connection.cursor()
     cursor.execute("""
     INSERT INTO users(username,email,password,phone_number,college)
-    VALUES(%s,%s,%s,%s,%s)
-    """,
-    (username,email,hashed_password,phone_number,college))
+    VALUES(%s,%s,%s,%s,%s)""",(username,email,hashed_password,phone_number,college))
     connection.commit()
     cur.close()
     connection.close()
