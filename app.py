@@ -97,9 +97,10 @@ def login():
     user_id , username, hashed_password = user
     if not bcrypt.check_password_hash(hashed_password,password):
         return jsonify({"error":"invalid password"}),401
-        token=create_jwt(user_id, username)
+    token=create_jwt(user_id, username)
     return jsonify({
         "message":"login successful",
+        "token": token,
         "user":{
             "user_id":user_id,
             "username":username,
@@ -110,3 +111,4 @@ def login():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
